@@ -51,6 +51,18 @@ public class Database {
         return res;
     }
     
+    public int getStatus(String user_id) throws SQLException{
+        Statement stmt = con.createStatement();
+        int res = 0;
+        
+        ResultSet rs = stmt.executeQuery(String.format("select * from users where userid = %s", user_id));
+        if(rs.next()){
+            res = Integer.valueOf(rs.getString("status"));
+        }
+        stmt.close();
+        return res;
+    }
+    
     public void closeConnection() throws SQLException{
         con.close();
     }
